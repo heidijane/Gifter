@@ -9,5 +9,7 @@ namespace Gifter.Data
 
         public DbSet<UserProfile> UserProfile { get; set; }
         public DbSet<Post> Post { get; set; }
+
+        public DbSet<Comment> Comment { get; set; }
     }
 }
