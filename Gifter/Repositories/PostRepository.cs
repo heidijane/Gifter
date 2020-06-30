@@ -17,17 +17,18 @@ namespace Gifter.Repositories
 
         public List<Post> GetAll()
         {
-            return _context.Post.Include(p => p.UserProfile).ToList();
+            return _context.Post.Include(p => p.UserProfile).Include(p => p.Comments).ToList();
         }
 
         public Post GetById(int id)
         {
-            return _context.Post.Include(p => p.UserProfile).FirstOrDefault(p => p.Id == id);
+            return _context.Post.Include(p => p.UserProfile).Include(p => p.Comments).FirstOrDefault(p => p.Id == id);
         }
 
         public List<Post> GetByUserProfileId(int id)
         {
             return _context.Post.Include(p => p.UserProfile)
+                            .Include(p => p.Comments)
                             .Where(p => p.UserProfileId == id)
                             .OrderBy(p => p.Title)
                             .ToList();
