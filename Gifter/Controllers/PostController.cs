@@ -44,6 +44,12 @@ namespace Gifter.Controllers
             return Ok(_postRepository.Search(q, sortDesc));
         }
 
+        [HttpGet("hottest")]
+        public IActionResult Hottest(string d)
+        {
+            return Ok(_postRepository.Hottest(d));
+        }
+
         [HttpPost]
         public IActionResult Post(Post post)
         {
