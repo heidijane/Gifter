@@ -21,9 +21,9 @@ export const PostForm = () => {
     }
 
     return (
-        <Card className="m-4">
+        <Card className="m-4 bg-light">
             <CardHeader>
-                <h3>Post .GIF!</h3>
+                <h3 className="font-weight-normal">Post!</h3>
             </CardHeader>
             <CardBody className="text-left">
                 <Form>

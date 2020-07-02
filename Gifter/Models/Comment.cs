@@ -15,8 +15,6 @@ namespace Gifter.Models
         [Required]
         public int PostId { get; set; }
 
-        public Post Post { get; set; }
-
         [Required]
         [StringLength(255, MinimumLength = 1)]
         public string Message { get; set; }

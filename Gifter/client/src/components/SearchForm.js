@@ -4,7 +4,7 @@ import { PostContext } from "../providers/PostProvider";
 
 export const SearchForm = () => {
 
-    //Prevents a function from being called to often
+    //Prevents a function from being called too often
     //Function will only be invoked after "wait" time in milliseconds has elapsed
     const debounce = (func, wait) => {
         let timeout;
@@ -40,7 +40,7 @@ export const SearchForm = () => {
 
     return (
         <Card className="m-4">
-            <CardBody className="text-left">
+            <CardBody className="text-left bg-light">
                 <Form>
                     <FormGroup>
                         <Input
@@ -48,7 +48,7 @@ export const SearchForm = () => {
                             name="search"
                             id="search"
                             innerRef={search}
-                            placeholder="Search!"
+                            placeholder="Start typing to filter..."
                             onChange={
                                 evt => {
                                     constructNewSearch();
