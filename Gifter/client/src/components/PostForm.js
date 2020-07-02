@@ -18,6 +18,11 @@ export const PostForm = () => {
             UserProfileId: 1,
             DateCreated: new Date()
         });
+
+        //clear out values when form is submitted
+        document.querySelector("#postTitle").value = "";
+        document.querySelector("#postUrl").value = "";
+        document.querySelector("#postCaption").value = "";
     }
 
     return (
