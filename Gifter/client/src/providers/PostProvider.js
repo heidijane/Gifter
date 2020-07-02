@@ -22,7 +22,6 @@ export const PostProvider = (props) => {
     };
 
     const searchPosts = (search, sortDesc = true) => {
-        console.log(search);
         return fetch("api/post/search?q=" + search + "&sortDesc=" + sortDesc)
             .then((res) => res.json())
             .then(setPosts);
