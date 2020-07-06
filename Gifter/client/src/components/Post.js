@@ -10,7 +10,7 @@ const Post = ({ post }) => {
             <CardBody>
                 <h3><Link to={`/posts/${post.id}`}>{post.title}</Link></h3>
                 <p className="lead">{post.caption}</p>
-                <p>Posted by {post.userProfile.name}</p>
+                <p>Posted by <Link to={`/users/${post.userProfile.id}`}>{post.userProfile.name}</Link></p>
                 <CommentList comments={post.comments}></CommentList>
             </CardBody>
         </Card>
