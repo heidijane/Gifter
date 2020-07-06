@@ -39,26 +39,27 @@ export const SearchForm = () => {
     }, 800);
 
     return (
-        <Card className="m-4">
-            <CardBody className="text-left bg-light">
-                <Form>
-                    <FormGroup>
-                        <Input
-                            type="text"
-                            name="search"
-                            id="search"
-                            innerRef={search}
-                            placeholder="Start typing to filter..."
-                            onChange={
-                                evt => {
-                                    constructNewSearch();
+        <div className="container">
+            <Card className="m-4">
+                <CardBody className="text-left bg-light">
+                    <Form>
+                        <FormGroup>
+                            <Input
+                                type="text"
+                                name="search"
+                                id="search"
+                                innerRef={search}
+                                placeholder="Start typing to filter..."
+                                onChange={
+                                    evt => {
+                                        constructNewSearch();
+                                    }
                                 }
-                            }
-                        />
-                    </FormGroup>
-                </Form>
-            </CardBody>
-        </Card>
+                            />
+                        </FormGroup>
+                    </Form>
+                </CardBody>
+            </Card></div>
     )
 
 }
