@@ -16,7 +16,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 
-
 namespace Gifter
 {
     public class Startup
@@ -34,11 +33,6 @@ namespace Gifter
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddControllers()
-                    .AddNewtonsoftJson(options =>
-                        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-                    );
-
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";
             services
@@ -55,6 +49,8 @@ namespace Gifter
                         ValidateLifetime = true
                     };
                 });
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,31 +59,19 @@ namespace Gifter
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-
-                app.UseDeveloperExceptionPage();
-
-                // Do not block requests while in development
-                app.UseCors(options =>
-                {
-                    options.AllowAnyOrigin();
-                    options.AllowAnyMethod();
-                    options.AllowAnyHeader();
-                });
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-            app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
         }
     }
 }

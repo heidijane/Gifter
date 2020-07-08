@@ -14,22 +14,15 @@ export const PostForm = () => {
     const caption = useRef();
 
     const constructNewPost = () => {
+
         addPost({
             Title: title.current.value,
             ImageUrl: postUrl.current.value,
             Caption: caption.current.value,
-            UserProfileId: 1,
             DateCreated: new Date()
-        })
-            .then((p) => {
-                // Navigate the user back to the home route
-                history.push("/");
-            });
-
-        //clear out values when form is submitted
-        document.querySelector("#postTitle").value = "";
-        document.querySelector("#postUrl").value = "";
-        document.querySelector("#postCaption").value = "";
+        }).then((p) => {
+            history.push("/");
+        });
     }
 
     return (
