@@ -8,7 +8,6 @@ namespace Gifter.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class PostController : ControllerBase
     {
         private readonly PostRepository _postRepository;

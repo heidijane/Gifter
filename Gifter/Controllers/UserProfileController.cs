@@ -32,7 +32,7 @@ namespace Gifter.Controllers
             return Ok(userProfile);
         }
 
-        [HttpGet("{firebaseUserId}")]
+        [HttpGet("getbyfirebase/{firebaseUserId}")]
         public IActionResult GetByFirebaseUserId(string firebaseUserId)
         {
             var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
@@ -44,10 +44,11 @@ namespace Gifter.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(UserProfile userProfile)
+        public IActionResult Register(UserProfile userProfile)
         {
             _userProfileRepository.Add(userProfile);
-            return CreatedAtAction("Get", new { id = userProfile.Id }, userProfile);
+            return CreatedAtAction(
+                nameof(GetByFirebaseUserId), new { firebaseUserId = userProfile.FirebaseUserId }, userProfile);
         }
 
         [HttpPut("{id}")]
