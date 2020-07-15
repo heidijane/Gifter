@@ -109,6 +109,19 @@ namespace Gifter.Tests
 
         }
 
+        [Fact]
+        public void Posts_Belong_To_Specified_User()
+        {
+            var repo = new PostRepository(_context);
+
+            int specifiedUserId = 3;
+            var results = repo.GetByUserProfileId(specifiedUserId);
+            foreach (Post post in results)
+            {
+                Assert.True(post.UserProfileId == specifiedUserId);
+            }
+        }
+
         // Add sample data
         private void AddSampleData()
         {
