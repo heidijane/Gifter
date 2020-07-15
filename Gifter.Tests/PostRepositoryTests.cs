@@ -122,6 +122,16 @@ namespace Gifter.Tests
             }
         }
 
+        [Fact]
+        public void Return_Empty_List_When_No_Posts()
+        {
+            var repo = new PostRepository(_context);
+            var results = repo.GetByUserProfileId(5); //this user doesn't exist
+
+            Assert.True(results.GetType() == typeof(List<Post>)); //check to make sure variable is a list
+            Assert.True(!results.Any()); //check if list has any elements
+        }
+
         // Add sample data
         private void AddSampleData()
         {
