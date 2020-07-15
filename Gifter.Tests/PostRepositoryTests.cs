@@ -2,6 +2,8 @@
 using Gifter.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -82,6 +84,31 @@ namespace Gifter.Tests
             Assert.Null(result);
         }
 
+        [Fact]
+        public void Posts_Ordered_Alphabetically_By_Title()
+        {
+            var repo = new PostRepository(_context);
+            var results = repo.GetByUserProfileId(3);
+
+            //put the results in alphabetical order by title so that we can compare the two lists
+            List<Post> expectedList = results.OrderBy(p => p.Title).ToList();
+
+            //Debug.WriteLine("Results:");
+            //foreach (Post post in results)
+            //{
+            //    Debug.WriteLine(post.Title);
+            //}
+            //Debug.WriteLine("");
+            //Debug.WriteLine("Ordered Output:");
+            //foreach (Post post in expectedList)
+            //{
+            //    Debug.WriteLine(post.Title);
+            //}
+
+            Assert.True(expectedList.SequenceEqual(results));
+
+        }
+
         // Add sample data
         private void AddSampleData()
         {
@@ -140,6 +167,15 @@ namespace Gifter.Tests
                 DateCreated = DateTime.Now - TimeSpan.FromDays(12),
             };
 
+            var post4 = new Post()
+            {
+                Caption = "Bowling",
+                Title = "It's my hobby",
+                ImageUrl = "http://foo.gif",
+                UserProfile = user3,
+                DateCreated = DateTime.Now - TimeSpan.FromDays(13),
+            };
+
             var comment1 = new Comment()
             {
                 Post = post2,
@@ -157,6 +193,7 @@ namespace Gifter.Tests
             _context.Add(post1);
             _context.Add(post2);
             _context.Add(post3);
+            _context.Add(post4);
             _context.Add(comment1);
             _context.Add(comment2);
             _context.SaveChanges();

@@ -22,7 +22,7 @@ namespace Gifter.Repositories
         {
             return _context.Post.Include(p => p.UserProfile)
                                 .Include(p => p.Comments)
-                                .OrderByDescending(p => p.DateCreated)
+                                .OrderBy(p => p.DateCreated)
                                 .ToList();
         }
 
