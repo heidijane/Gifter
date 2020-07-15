@@ -132,6 +132,54 @@ namespace Gifter.Tests
             Assert.True(!results.Any()); //check if list has any elements
         }
 
+        [Fact]
+        public void GetMostRecent_Returns_One_Post()
+        {
+            var repo = new PostRepository(_context);
+            var results = repo.GetMostRecent(1);
+
+            Assert.True(results.Count == 1);
+        }
+
+        [Fact]
+        public void GetMostRecent_Returns_Three_Posts()
+        {
+            var repo = new PostRepository(_context);
+            var results = repo.GetMostRecent(3);
+
+            Assert.True(results.Count == 3);
+        }
+
+        [Fact]
+        public void GetMostRecent_Limits_Result_Count_To_Three()
+        {
+            var repo = new PostRepository(_context);
+            var results = repo.GetMostRecent(100);
+
+            Assert.True(results.Count == 3);
+        }
+
+        [Fact]
+        public void GetMostRecent_Less_Than_1_Returns_Empty()
+        {
+            var repo = new PostRepository(_context);
+            var results = repo.GetMostRecent(0);
+
+            Assert.True(!results.Any());
+        }
+
+        [Fact]
+        public void GetMostRecent_In_Decending_Order_By_Date()
+        {
+            var repo = new PostRepository(_context);
+            var results = repo.GetMostRecent(3); //this user has more than one post
+
+            //put the list in the expected order so that we can compare
+            List<Post> expectedList = results.OrderByDescending(p => p.DateCreated).ToList();
+
+            Assert.True(expectedList.SequenceEqual(results));
+        }
+
         // Add sample data
         private void AddSampleData()
         {

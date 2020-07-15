@@ -78,6 +78,12 @@ namespace Gifter.Repositories
                             .ToList();
         }
 
+        public List<Post> GetMostRecent(int numResults)
+        {
+            // TODO: Implement this!
+            throw new NotImplementedException();
+        }
+
         public void Add(Post post)
         {
             _context.Add(post);
