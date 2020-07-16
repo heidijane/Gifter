@@ -80,8 +80,12 @@ namespace Gifter.Repositories
 
         public List<Post> GetMostRecent(int numResults)
         {
-            // TODO: Implement this!
-            throw new NotImplementedException();
+            return _context.Post.Include(p => p.UserProfile)
+                            .Include(p => p.Comments)
+                                .ThenInclude(c => c.UserProfile)
+                            .OrderByDescending(p => p.DateCreated)
+                            .Take(numResults)
+                            .ToList();
         }
 
         public void Add(Post post)

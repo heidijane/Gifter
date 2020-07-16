@@ -54,18 +54,18 @@ namespace Gifter.Tests
             var repo = new PostRepository(_context);
             var results = repo.Search("", true);
 
-            Assert.Equal(3, results.Count);
+            Assert.Equal(4, results.Count);
             Assert.Equal(mostRecentTitle, results[0].Title);
         }
 
         [Fact]
         public void Search_Can_Return_Most_Recent_Last()
         {
-            var mostRecentTitle = "The Dude";
+            var mostRecentTitle = "It's my hobby";
             var repo = new PostRepository(_context);
             var results = repo.Search("", false);
 
-            Assert.Equal(3, results.Count);
+            Assert.Equal(4, results.Count);
             Assert.Equal(mostRecentTitle, results[2].Title);
         }
 
@@ -151,12 +151,12 @@ namespace Gifter.Tests
         }
 
         [Fact]
-        public void GetMostRecent_Limits_Result_Count_To_Three()
+        public void GetMostRecent_Cant_Be_Greater_Than_Num_Of_Posts()
         {
             var repo = new PostRepository(_context);
             var results = repo.GetMostRecent(100);
 
-            Assert.True(results.Count == 3);
+            Assert.True(results.Count == 4);
         }
 
         [Fact]
@@ -244,7 +244,7 @@ namespace Gifter.Tests
                 Title = "It's my hobby",
                 ImageUrl = "http://foo.gif",
                 UserProfile = user3,
-                DateCreated = DateTime.Now - TimeSpan.FromDays(13),
+                DateCreated = DateTime.Now - TimeSpan.FromDays(11),
             };
 
             var comment1 = new Comment()
